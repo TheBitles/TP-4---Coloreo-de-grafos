@@ -5,30 +5,18 @@ public class MatrizSimetrica {
 	private int[] matrizSimetrica; // Vector de pesos
 	private int ordenMatriz;
 	private int dimensionVector;
-	private int ultPos; // Última posición libre
 	
 	public MatrizSimetrica(int n) { // Recibe el orden de la matriz
 		this.ordenMatriz = n;
 		this.dimensionVector = (n*n - n) / 2;
-		this.ultPos = 0;
-		matrizSimetrica = new int[this.dimensionVector];
-	}
-
-	public MatrizSimetrica(int mat[][], int n) { // Recibe la matriz y el orden de la misma
-		this.ordenMatriz = n;
-		this.dimensionVector = (n*n - n) / 2;
-		this.ultPos = 0;
 		matrizSimetrica = new int[this.dimensionVector];
 		
-		for(int i = 0 ; i < n - 1 ; i++) {
-			for(int j = i + 1 ; j < n ; j++)
-				agregar(mat[i][j]);
-		}
+		for(int i = 0 ; i < n - 1 ; i++)
+			matrizSimetrica[i] = 0;
 	}
 	
-	public void agregar(int elemento) {
-		matrizSimetrica[this.ultPos] = elemento;
-		this.ultPos++;
+	public void ponerElemento(int elemento, int pos) {
+		matrizSimetrica[pos] = elemento;
 	}
 	
 	public int getIndice(int fil, int col) {

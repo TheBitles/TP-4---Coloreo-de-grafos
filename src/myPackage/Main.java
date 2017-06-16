@@ -10,15 +10,19 @@ public class Main {
 		File file = new File("grafo.txt");
 		Scanner scan = new Scanner(file);
 		
-		int orden = scan.nextInt();
-		int[][] matAux = new int[orden][orden];
+		int ordenMat = scan.nextInt();
+		int cantPares = scan.nextInt();
+		MatrizSimetrica mat = new MatrizSimetrica(ordenMat);
+		scan.nextDouble();
+		scan.nextInt();
+		scan.nextInt();
 		
-		for(int i = 0 ; i < orden ; i++) {
-			for(int j = 0 ; j < orden ; j++)
-				matAux[i][j] = (scan.nextInt());
+		for(int i = 0 ; i < cantPares ; i++) {
+			int fila = scan.nextInt();
+			int columna = scan.nextInt();
+			mat.ponerElemento(1, mat.getIndice(fila, columna));
 		}
-
-		MatrizSimetrica mat = new MatrizSimetrica(matAux, orden);
+		
 		mat.mostrar();
 	}
 
