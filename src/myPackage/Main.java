@@ -2,11 +2,12 @@ package myPackage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws IOException {
 		File file = new File("grafo.txt");
 		Scanner scan = new Scanner(file);
 		
@@ -24,6 +25,8 @@ public class Main {
 		}
 		
 		mat.mostrar();
+		
+		GrafoGenerator.aleatorioConProbabilidad(400, 0.3);
 	}
 
 }
