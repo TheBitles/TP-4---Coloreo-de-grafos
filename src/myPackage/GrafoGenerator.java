@@ -98,10 +98,27 @@ public class GrafoGenerator {
 
 		ParDeNodos grados = calcularGrado(array, cantNodos);
 		double porcentajeAdyacencia = (double) cantAristas / cantMaximaAristas;
-		String path = "grafo_regular_con_grado.txt";
+		String path = "grafo_regular.txt";
 
 		escribirGrafoEnArchivo(path, array, cantNodos, cantAristas, porcentajeAdyacencia, grados.getNodo1(),
 				grados.getNodo2());
+	}
+	
+	public static void regularConPorcentajeAdyacencia(int cantNodos, double porcentaje) throws IOException {
+		int cantMaximaAristas = (cantNodos*(cantNodos - 1)) / 2;
+		int grado = (int) Math.ceil(((porcentaje * cantMaximaAristas) / (cantNodos / 2)));
+		double minimo = (double) (cantNodos/2) / cantMaximaAristas;
+		
+		if(porcentaje < minimo) {
+			System.out.println("El porcentaje de adyacencia ingresado es demasiado bajo para generar un grafo regular (el minimo es: " + String.format("%1.3f", minimo) + ")");
+			System.exit(1);
+		}
+		if(porcentaje > 1) {
+			System.out.println("El porcentaje de adyacencia ingresado es superior al 100%");
+			System.exit(1);
+		}
+		
+		regularConGrado(cantNodos, grado);
 	}
 
 	private static ParDeNodos calcularGrado(ArrayList<ParDeNodos> array, int cantNodos) {
@@ -194,4 +211,5 @@ public class GrafoGenerator {
 			return 0;
 		}
 	}
+	
 }

@@ -24,12 +24,11 @@ public class Main {
 			mat.ponerElemento(1, mat.getIndice(fila, columna));
 		}
 		
-		mat.mostrar();
-		
 		//GrafoGenerator.aleatorioConProbabilidad(10, 0.9);
 		//GrafoGenerator.aleatorioConPorcentajeAdyacencia(10, 0.5);
 		
-		GrafoGenerator.regularConGrado(8, 3);
+		//GrafoGenerator.regularConGrado(8, 3);
+		//GrafoGenerator.regularConPorcentajeAdyacencia(6, 0.1);
 	}
 
 }
