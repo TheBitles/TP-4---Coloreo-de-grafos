@@ -26,7 +26,7 @@ public class Main {
 		
 		mat.mostrar();
 		
-		GrafoGenerator.aleatorioConProbabilidad(400, 0.3);
+		GrafoGenerator.aleatorioConProbabilidad(10, 0.9);
 	}
 
 }
