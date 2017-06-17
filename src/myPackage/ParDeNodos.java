@@ -25,5 +25,9 @@ public class ParDeNodos {
 	public void setNodo2(int nodo2) {
 		this.nodo2 = nodo2;
 	}
+	
+	public void mostrar() {
+		System.out.println(this.nodo1 + " " + this.nodo2);
+	}
 
 }

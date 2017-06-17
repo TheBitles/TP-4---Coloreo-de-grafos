@@ -27,6 +27,7 @@ public class Main {
 		mat.mostrar();
 		
 		GrafoGenerator.aleatorioConProbabilidad(10, 0.9);
+		GrafoGenerator.aleatorioConPorcentajeAdyacencia(10, 0.5);
 	}
 
 }
