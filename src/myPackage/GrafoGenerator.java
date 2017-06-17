@@ -120,6 +120,43 @@ public class GrafoGenerator {
 		
 		regularConGrado(cantNodos, grado);
 	}
+	
+	public static void nPartito(int cantNodos, int cantConjuntos) throws IOException {
+		ArrayList<ParDeNodos> array = new ArrayList<ParDeNodos>();
+		int cantMaximaAristas = (cantNodos*(cantNodos - 1)) / 2;
+		int cantAristas = 0;
+		int noAgregar = 0;
+		int salto;
+		boolean noAgregarFlag = true;
+		
+		salto = cantConjuntos;
+
+		for(int i = 0 ; i < cantNodos - 1 ; i++) {
+			for(int j = i + 1 ; j < cantNodos ; j++) {
+				if(noAgregarFlag) {
+					noAgregar = i + salto;
+					noAgregarFlag = false;
+				}
+				if(j != noAgregar) {
+					array.add(new ParDeNodos(i, j));
+					cantAristas++;
+				}
+				else {
+					salto+=cantConjuntos;
+					noAgregarFlag = true;
+				}
+			}
+			salto = cantConjuntos;
+			noAgregarFlag = true;
+		}
+		
+		ParDeNodos grados = calcularGrado(array, cantNodos);
+		double porcentajeAdyacencia = (double) cantAristas / cantMaximaAristas;
+		String path = "grafo_" + String.valueOf(cantConjuntos) + "_partito.txt";
+		
+		escribirGrafoEnArchivo(path, array, cantNodos, cantAristas, porcentajeAdyacencia, grados.getNodo1(),
+				grados.getNodo2());
+	}
 
 	private static ParDeNodos calcularGrado(ArrayList<ParDeNodos> array, int cantNodos) {
 		int[] grados = new int[cantNodos];
