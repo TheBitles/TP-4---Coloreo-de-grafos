@@ -7,20 +7,21 @@ import java.util.Scanner;
 
 public class ProbadorColoreo {
 
-	private MatrizSimetrica entrada;
+	private ArrayList<ParDeNodos> entrada;
 	private ArrayList<NodoColoreado> salida;
 	
 	public ProbadorColoreo(String pathIn, String pathOut) throws FileNotFoundException {
 		File file = new File(pathIn);
 		Scanner scan = new Scanner(file);
-		salida = new ArrayList<NodoColoreado>();
+		this.entrada = new ArrayList<ParDeNodos>();
+		this.salida = new ArrayList<NodoColoreado>();
 		
 		int cantAristas;
 		int fil;
 		int col;
 		int indice;
-		
-		this.entrada = new MatrizSimetrica(scan.nextInt());
+
+		scan.nextInt();
 		cantAristas = scan.nextInt();
 		scan.nextDouble();
 		scan.nextInt();
@@ -29,10 +30,7 @@ public class ProbadorColoreo {
 		for(int i = 0 ; i < cantAristas ; i++) {
 			fil = scan.nextInt();
 			col = scan.nextInt();
-			indice = this.entrada.getIndice(fil, col);
-			//System.out.println(indice);
-			System.out.println(this.entrada.getFila(indice) + " " + this.entrada.getColumna(indice));
-			this.entrada.ponerArista(indice);
+			this.entrada.add(new ParDeNodos(fil, col));
 		}
 		
 		scan.close();
@@ -56,9 +54,8 @@ public class ProbadorColoreo {
 	}
 	
 	public void mostrarEntrada() {
-		for(int i = 0 ; i < this.entrada.getDimension() ; i++) {
-			if(this.entrada.hayArista(i))
-				System.out.println(this.entrada.getFila(i) + " " + this.entrada.getColumna(i));
+		for(int i = 0 ; i < this.entrada.size() ; i++) {
+			System.out.println(this.entrada.get(i).getNodo1() + " " + this.entrada.get(i).getNodo2());
 		}
 	}
 	

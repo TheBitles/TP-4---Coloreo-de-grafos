@@ -10,7 +10,7 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		ProbadorColoreo probador = new ProbadorColoreo("grafo.in", "coloreado.out");
 		System.out.println("ENTRADA: ");
-		//probador.mostrarEntrada();
+		probador.mostrarEntrada();
 		System.out.println("SALIDA: ");
 		probador.mostrarSalida();
 		

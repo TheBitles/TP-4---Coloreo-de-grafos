@@ -31,15 +31,6 @@ public class MatrizSimetrica {
 		matrizSimetrica[fil * this.ordenMatriz + col - (fil*fil + 3*fil + 2) / 2] = true;
 	}
 	
-	public int getFila(int indice) {
-		return this.dimensionVector - ((int) Math.ceil((1 + Math.sqrt(1 + 8*(this.dimensionVector - indice)))) / 2);
-	}
-	
-	public int getColumna(int indice) {
-		int fila = getFila(indice);
-		return this.ordenMatriz - (this.dimensionVector - indice - ((this.ordenMatriz - fila - 1)*2 -(this.ordenMatriz - fila - 1))/2);
-	}
-	
 	public void mostrar() {
 		for(int i = 0 ; i < this.dimensionVector ; i++)
 			System.out.print(this.matrizSimetrica[i] + " ");
