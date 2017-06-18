@@ -32,8 +32,14 @@ public class MatrizSimetrica {
 	}
 	
 	public void mostrar() {
-		for(int i = 0 ; i < this.dimensionVector ; i++)
-			System.out.print(this.matrizSimetrica[i] + " ");
+		for(int i = 0 ; i < this.dimensionVector ; i++) {
+			if(this.matrizSimetrica[i])
+				System.out.print(1 + " ");
+			else
+				System.out.print(0 + " ");
+		}
+			
+
 	}
 	
 	public int getOrdenMatriz() {
