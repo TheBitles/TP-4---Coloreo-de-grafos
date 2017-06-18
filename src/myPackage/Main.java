@@ -29,7 +29,7 @@ public class Main {
 		
 		//GrafoGenerator.regularConGrado(8, 3);
 		//GrafoGenerator.regularConPorcentajeAdyacencia(6, 0.1);
-		GrafoGenerator.nPartito(8, 4);
+		GrafoGenerator.nPartito(4, 5);
 	}
 
 }

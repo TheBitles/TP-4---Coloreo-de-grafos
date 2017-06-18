@@ -129,6 +129,11 @@ public class GrafoGenerator {
 		int salto;
 		boolean noAgregarFlag = true;
 		
+		if(cantConjuntos > cantNodos) {
+			System.out.println("La cantidad de conjuntos no puede ser mayor a la cantidad de nodos");
+			System.exit(1);
+		}
+		
 		salto = cantConjuntos;
 
 		for(int i = 0 ; i < cantNodos - 1 ; i++) {
