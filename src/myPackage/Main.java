@@ -13,7 +13,11 @@ public class Main {
 		probador.mostrarEntrada();
 		System.out.println("SALIDA: ");
 		probador.mostrarSalida();
-		
+		System.out.println();
+		if(probador.probar())
+			System.out.println("TODO OK");
+		else
+			System.out.println("SALIDA NO VÁLIDA");
 		//GrafoGenerator.aleatorioConProbabilidad(10, 0.9);
 		//GrafoGenerator.aleatorioConPorcentajeAdyacencia(10, 0.5);
 		//GrafoGenerator.regularConGrado(8, 3);

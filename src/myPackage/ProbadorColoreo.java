@@ -9,6 +9,7 @@ public class ProbadorColoreo {
 
 	private ArrayList<ParDeNodos> entrada;
 	private ArrayList<NodoColoreado> salida;
+	private int cantNodos;
 	
 	public ProbadorColoreo(String pathIn, String pathOut) throws FileNotFoundException {
 		File file = new File(pathIn);
@@ -21,7 +22,7 @@ public class ProbadorColoreo {
 		int col;
 		int indice;
 
-		scan.nextInt();
+		this.cantNodos = scan.nextInt();
 		cantAristas = scan.nextInt();
 		scan.nextDouble();
 		scan.nextInt();
@@ -51,6 +52,44 @@ public class ProbadorColoreo {
 		}
 		
 		scan.close();
+	}
+	
+	public boolean probar() {
+		int nodoColoreado;
+		int nodo1;
+		int nodo2;
+		int color1 = -1;
+		int color2 = -1;
+		boolean flagColor1 = false;
+		boolean flagColor2 = false;
+		
+		for(int i = 0 ; i < this.entrada.size() ; i++) {
+			nodo1 = this.entrada.get(i).getNodo1();
+			nodo2 = this.entrada.get(i).getNodo2();
+			for(int j = 0 ; j < this.salida.size() ; j++) {
+				nodoColoreado = this.salida.get(j).getNodo();
+				if(nodoColoreado == nodo1 && !flagColor1) {
+					color1 = this.salida.get(j).getColor();
+					flagColor1 = true;
+				}
+				else {
+					if(nodoColoreado == nodo2 && !flagColor2) {
+						color2 = this.salida.get(j).getColor();
+						flagColor2 = true;
+					}
+				}
+				if(flagColor1 && flagColor2) {
+					if(color1 == color2 || (nodoColoreado == nodo1 && nodoColoreado == nodo2)) // nodos adyacentes con el mismo color, o nodo coloreado mas de 1 vez
+						return false;
+				}
+			}
+			if(!flagColor1 || !flagColor2) // hay algún nodo sin colorear
+				return false;
+			flagColor1 = false;
+			flagColor2 = false;
+		}
+		
+		return true;
 	}
 	
 	public void mostrarEntrada() {
