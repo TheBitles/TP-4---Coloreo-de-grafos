@@ -9,7 +9,8 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		GrafoNDNP grafo = new GrafoNDNP("grafo.in");
-		grafo.mostrar();
+		//grafo.mostrar();
+		grafo.mostrarAristas();
 		/*
 		ProbadorColoreo probador = new ProbadorColoreo("grafo.in", "coloreado.out");
 		System.out.println("ENTRADA: ");
