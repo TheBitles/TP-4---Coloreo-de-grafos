@@ -8,28 +8,17 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		File file = new File("grafo.txt");
-		Scanner scan = new Scanner(file);
-		
-		int ordenMat = scan.nextInt();
-		int cantPares = scan.nextInt();
-		MatrizSimetrica mat = new MatrizSimetrica(ordenMat);
-		scan.nextDouble();
-		scan.nextInt();
-		scan.nextInt();
-		
-		for(int i = 0 ; i < cantPares ; i++) {
-			int fila = scan.nextInt();
-			int columna = scan.nextInt();
-			mat.ponerElemento(1, mat.getIndice(fila, columna));
-		}
+		ProbadorColoreo probador = new ProbadorColoreo("grafo.in", "coloreado.out");
+		System.out.println("ENTRADA: ");
+		//probador.mostrarEntrada();
+		System.out.println("SALIDA: ");
+		probador.mostrarSalida();
 		
 		//GrafoGenerator.aleatorioConProbabilidad(10, 0.9);
 		//GrafoGenerator.aleatorioConPorcentajeAdyacencia(10, 0.5);
-		
 		//GrafoGenerator.regularConGrado(8, 3);
 		//GrafoGenerator.regularConPorcentajeAdyacencia(6, 0.1);
-		GrafoGenerator.nPartito(4, 5);
+		//GrafoGenerator.nPartito(4, 5);
 	}
 
 }
