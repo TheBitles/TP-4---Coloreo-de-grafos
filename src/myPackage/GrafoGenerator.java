@@ -67,14 +67,26 @@ public class GrafoGenerator {
 		int salto = 0;
 		int j = 0;
 		
+		int nodo1;
+		int nodo2;
+		
 		if (grado % 2 != 0 && cantNodos % 2 != 0) {
 			System.out.println("No se puede generar un grafo regular de grado impar con N impar");
+			return;
+		}
+		if(grado >= cantNodos) {
+			System.out.println("El grado no puede ser igual, o mayor a la cantidad de nodos");
 			return;
 		}
 
 		if (grado % 2 != 0) { // si el grado es impar, genero la cruz
 			for (int i = 0; i < cantNodos / 2; i++) {
-				array.add(new ParDeNodos(i, i + cantNodos / 2));
+				nodo1 = i;
+				nodo2 = i + cantNodos / 2;
+				if(nodo1 < nodo2)
+					array.add(new ParDeNodos(nodo1, nodo2));
+				else
+					array.add(new ParDeNodos(nodo2, nodo1));
 				cantAristas++;
 			}
 		}
@@ -84,10 +96,19 @@ public class GrafoGenerator {
 				salto = gradoActual / 2;
 				j = 0;
 				for (int i = 0; i < cantNodos; i++) {
-					if(i + salto < cantNodos) 
-						array.add(new ParDeNodos(i, i + salto));
+					if(i + salto < cantNodos) {
+						nodo1 = i;
+						nodo2 = i + salto;
+						if(nodo1 < nodo2)
+							array.add(new ParDeNodos(nodo1, nodo2));
+						else
+							array.add(new ParDeNodos(nodo2, nodo1));
+					}
 					else {
-						array.add(new ParDeNodos(i, j));
+						if(i < j)
+							array.add(new ParDeNodos(i, j));
+						else
+							array.add(new ParDeNodos(j, i));
 						j++;
 					}
 					cantAristas++;

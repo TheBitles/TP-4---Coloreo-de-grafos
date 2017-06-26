@@ -25,6 +25,8 @@ public class GrafoNDNP {
 	private ArrayList<Nodo> nodos;
 	private int[] nodosColoreados; // el indice coincide con el numero de nodo, y el valor que guarda es el color
 	private int[] gradosNodos;
+	
+	private int mejorColor = 0;
 	private int[] solucion;
 
 	public MatrizSimetrica getGrafo() {
@@ -58,6 +60,7 @@ public class GrafoNDNP {
 		for (int i = 0; i < this.cantAristas; i++) {
 			fil = scan.nextInt();
 			col = scan.nextInt();
+			System.out.println(i);
 			gradosNodos[fil]++;
 			gradosNodos[col]++;
 			indice = this.grafo.getIndice(fil, col);
@@ -77,7 +80,9 @@ public class GrafoNDNP {
 		int color = 1;
 		int nodo;
 		int indice;
-
+		int j;
+		
+		this.colorMax = 1;
 		for (int i = 0; i < this.cantNodos; i++)
 			this.nodosColoreados[i] = 0;
 
@@ -86,7 +91,8 @@ public class GrafoNDNP {
 		for (int i = 1; i < this.cantNodos; i++) {
 			nodo = this.nodos.get(i).getNroNodo();
 			this.nodosColoreados[nodo] = color;
-			for(int j = 0 ; j < this.cantNodos ; j++) {
+			j = 0;
+			while(j < this.cantNodos) {
 				if (nodo != j) {
 					if (nodo < j)
 						indice = this.grafo.getIndice(nodo, j);
@@ -98,34 +104,34 @@ public class GrafoNDNP {
 						if (color > colorMax)
 							colorMax = color;
 						this.nodosColoreados[nodo] = color;
-						j = 0;
+						j = -1;
 					}
 				}
+				j++;
 			}
 			color = 1;
 		}
 	}
 
 	public void coloreoSecuencial(int corridas) throws IOException {
-		int mejorColor = 0;
 		int nroCorrida = 0;
 		for (int i = 0; i < corridas; i++) {
 			Collections.shuffle(this.nodos);
 			this.colorear();
-			if(this.colorMax < mejorColor || mejorColor == 0) {
-				mejorColor = this.colorMax;
-				nroCorrida = i;
+			
+			if(this.colorMax < this.mejorColor || this.mejorColor == 0) {
+				this.mejorColor = this.colorMax;
+				nroCorrida = i+1;
 				this.solucion = this.nodosColoreados.clone(); // copio la mejor solucion hasta el momento
 			}
 		}
 		
 		this.escribirSolucion();
 		System.out.print("SECUENCIAL: ");
-		System.out.println("Menor cantidad de colores: " + mejorColor + ", en numero de iteracion: " + nroCorrida);
+		System.out.println("Menor cantidad de colores: " + this.mejorColor + ", en numero de iteracion: " + nroCorrida);
 	}
 
 	public void coloreoWelshPowell(int corridas) throws IOException {
-		int mejorColor = 0;
 		int nroCorrida = 0;
 		for (int i = 0 ; i < corridas ; i++) {
 			Collections.shuffle(this.nodos);
@@ -136,20 +142,21 @@ public class GrafoNDNP {
 				}
 			});
 			this.colorear();
-			if(this.colorMax < mejorColor || mejorColor == 0) {
-				mejorColor = this.colorMax;
-				nroCorrida = i;
+			
+			if(this.colorMax < this.mejorColor || this.mejorColor == 0) {
+				this.mejorColor = this.colorMax;
+				nroCorrida = i+1;
 				this.solucion = this.nodosColoreados.clone(); // copio la mejor solucion hasta el momento
 			}
 		}
 
 		this.escribirSolucion();
 		System.out.print("WELSH-POWELL: ");
-		System.out.println("Menor cantidad de colores: " + mejorColor + ", en numero de iteracion: " + nroCorrida);
+		System.out.println("Menor cantidad de colores: " + this.mejorColor + ", en numero de iteracion: " + nroCorrida);
 	}
+	
 
 	public void coloreoMatula(int corridas) throws IOException {
-		int mejorColor = 0;
 		int nroCorrida = 0;
 		for (int i = 0 ; i < corridas ; i++) {
 			Collections.shuffle(this.nodos);
@@ -160,16 +167,17 @@ public class GrafoNDNP {
 				}
 			});
 			this.colorear();
-			if(this.colorMax < mejorColor || mejorColor == 0) {
-				mejorColor = this.colorMax;
-				nroCorrida = i;
+			
+			if(this.colorMax < mejorColor || this.mejorColor == 0) {
+				this.mejorColor = this.colorMax;
+				nroCorrida = i+1;
 				this.solucion = this.nodosColoreados.clone(); // copio la mejor solucion hasta el momento
 			}
 		}
 		
 		this.escribirSolucion();
 		System.out.print("MATULA: ");
-		System.out.println("Menor cantidad de colores: " + mejorColor + ", en numero de iteracion: " + nroCorrida);
+		System.out.println("Menor cantidad de colores: " + this.mejorColor + ", en numero de iteracion: " + nroCorrida);
 	}
 
 	public void mostrar() {
@@ -213,21 +221,4 @@ public class GrafoNDNP {
 		buffer.close();
 	}
 
-	// test
-	public void mostrarAristas() {
-		int n = this.cantNodos - 1;
-		int fil = -1;
-		int col = -1;
-		int k = 0;
-
-		do {
-			for (int i = k; i < n; i++) {
-				fil = k;
-				col = i + 1;
-				if (this.grafo.hayArista(this.grafo.getIndice(fil, col)))
-					System.out.println(fil + " " + col);
-			}
-			k++;
-		} while (this.grafo.getIndice(fil, col) < this.grafo.getDimension() - 1);
-	}
 }

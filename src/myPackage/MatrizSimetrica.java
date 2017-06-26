@@ -24,7 +24,7 @@ public class MatrizSimetrica {
 	}
 	
 	public int getIndice(int fil, int col) {
-		return fil * this.ordenMatriz + col - (fil*fil + 3*fil + 2) / 2;
+		return (int) (fil * this.ordenMatriz + col - (Math.pow(fil, 2) + 3 * fil + 2) / 2);
 	}
 	
 	public void setIndice(int fil, int col) {

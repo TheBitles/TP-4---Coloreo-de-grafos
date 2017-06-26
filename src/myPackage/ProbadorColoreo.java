@@ -19,7 +19,7 @@ public class ProbadorColoreo {
 		
 		int cantAristas;
 		int fil;
-		int col;
+		int col = 0;
 		int indice;
 
 		this.cantNodos = scan.nextInt();
@@ -40,12 +40,12 @@ public class ProbadorColoreo {
 		
 		scan.nextInt();
 		scan.nextInt();
-		cantAristas = scan.nextInt();
+		scan.nextInt();
 		scan.nextDouble();
 		scan.nextInt();
 		scan.nextInt();
 		
-		for(int i = 0 ; i < cantAristas ; i++) {
+		for(int i = 0 ; i < this.cantNodos ; i++) {
 			fil = scan.nextInt(); // nodo
 			col = scan.nextInt(); // color
 			salida.add(new NodoColoreado(fil, col));
