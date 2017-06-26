@@ -9,14 +9,15 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		
-		//GrafoGenerator.regularConGrado(100, 4);
-		//GrafoNDNP grafo = new GrafoNDNP("grafo.in");
+		//GrafoGenerator.regularConGrado(50, 5);
+		GrafoNDNP grafo = new GrafoNDNP("grafo.in");
 		//grafo.mostrar();
 		//grafo.mostrarAristas();
 		//grafo.mostrarNodos();
-		//grafo.coloreoSecuencial(1);
-		//grafo.coloreoWelshPowell(10);
-		//grafo.coloreoMatula(10);
+		
+		grafo.coloreoSecuencial(100);
+		grafo.coloreoWelshPowell(100);
+		grafo.coloreoMatula(100);
 		
 		//System.out.println(grafo.getGrafo().hayArista(grafo.getGrafo().getIndice(1, 0)));
 		
@@ -33,7 +34,7 @@ public class Main {
 			System.out.println("SALIDA NO VÁLIDA");
 		*/
 		//GrafoGenerator.aleatorioConProbabilidad(10, 0.9);
-		GrafoGenerator.aleatorioConPorcentajeAdyacencia(600, 0.9);
+		//GrafoGenerator.aleatorioConPorcentajeAdyacencia(600, 0.9);
 		//GrafoGenerator.regularConGrado(8, 3);
 		//GrafoGenerator.regularConPorcentajeAdyacencia(1000, 0.50);
 		//GrafoGenerator.nPartito(4, 5);

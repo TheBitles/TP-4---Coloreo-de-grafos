@@ -1,0 +1,20 @@
+ALEATORIO 600 40%:
+	- 
+	- 
+	- 
+ALEATORIO 600 60%:
+	- 
+	- 
+	- 
+ALEATORIO 600 90%:
+	-
+	-
+	-
+REGULAR 1000 50%:
+	-
+	-
+	-
+REGULAR 1000 75%:
+	-
+	-
+	-

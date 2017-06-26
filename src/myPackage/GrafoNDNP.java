@@ -28,6 +28,7 @@ public class GrafoNDNP {
 	
 	private int mejorColor = 0;
 	private int[] solucion;
+	private int[] mejoresColores;
 
 	public MatrizSimetrica getGrafo() {
 		return this.grafo;
@@ -52,15 +53,17 @@ public class GrafoNDNP {
 		nodosColoreados = new int[this.cantNodos];
 		gradosNodos = new int[this.cantNodos];
 		solucion = new int[this.cantNodos];
+		mejoresColores = new int[this.cantNodos];
 
-		for (int i = 0; i < this.cantNodos; i++) {
+		for (int i = 0; i < this.cantNodos; i++)
 			gradosNodos[i] = 0;
-		}
+		
+		for (int i = 0 ; i < this.cantNodos ; i++)
+			mejoresColores[i] = 0;
 
 		for (int i = 0; i < this.cantAristas; i++) {
 			fil = scan.nextInt();
 			col = scan.nextInt();
-			System.out.println(i);
 			gradosNodos[fil]++;
 			gradosNodos[col]++;
 			indice = this.grafo.getIndice(fil, col);
@@ -124,11 +127,18 @@ public class GrafoNDNP {
 				nroCorrida = i+1;
 				this.solucion = this.nodosColoreados.clone(); // copio la mejor solucion hasta el momento
 			}
+			
+			this.mejoresColores[this.colorMax]++;
 		}
 		
-		this.escribirSolucion();
+		this.escribirSolucion("SECUENCIAL");
+		this.escribirVectorEstadistico("SECUENCIAL");
 		System.out.print("SECUENCIAL: ");
 		System.out.println("Menor cantidad de colores: " + this.mejorColor + ", en numero de iteracion: " + nroCorrida);
+		
+		this.mejorColor = 0;
+		for(int i = 0 ; i < this.cantNodos ; i++) // me aseguro de limpiar el vector estadistico
+			this.mejoresColores[i] = 0;
 	}
 
 	public void coloreoWelshPowell(int corridas) throws IOException {
@@ -148,11 +158,18 @@ public class GrafoNDNP {
 				nroCorrida = i+1;
 				this.solucion = this.nodosColoreados.clone(); // copio la mejor solucion hasta el momento
 			}
+			
+			this.mejoresColores[this.colorMax]++;
 		}
-
-		this.escribirSolucion();
+		
+		this.escribirSolucion("WELSH-POWELL");
+		this.escribirVectorEstadistico("WELSH-POWELL");
 		System.out.print("WELSH-POWELL: ");
 		System.out.println("Menor cantidad de colores: " + this.mejorColor + ", en numero de iteracion: " + nroCorrida);
+		
+		this.mejorColor = 0;
+		for(int i = 0 ; i < this.cantNodos ; i++) // me aseguro de limpiar el vector estadistico
+			this.mejoresColores[i] = 0;
 	}
 	
 
@@ -168,16 +185,23 @@ public class GrafoNDNP {
 			});
 			this.colorear();
 			
-			if(this.colorMax < mejorColor || this.mejorColor == 0) {
+			if(this.colorMax < this.mejorColor || this.mejorColor == 0) {
 				this.mejorColor = this.colorMax;
 				nroCorrida = i+1;
 				this.solucion = this.nodosColoreados.clone(); // copio la mejor solucion hasta el momento
 			}
+			
+			this.mejoresColores[this.colorMax]++;
 		}
 		
-		this.escribirSolucion();
+		this.escribirSolucion("MATULA");
+		this.escribirVectorEstadistico("MATULA");
 		System.out.print("MATULA: ");
 		System.out.println("Menor cantidad de colores: " + this.mejorColor + ", en numero de iteracion: " + nroCorrida);
+		
+		this.mejorColor = 0;
+		for(int i = 0 ; i < this.cantNodos ; i++) // me aseguro de limpiar el vector estadistico
+			this.mejoresColores[i] = 0;
 	}
 
 	public void mostrar() {
@@ -194,8 +218,8 @@ public class GrafoNDNP {
 			System.out.println("n: " + i + " g: " + this.gradosNodos[i]);
 	}
 
-	private void escribirSolucion() throws IOException {
-		FileWriter file = new FileWriter("coloreado.out");
+	private void escribirSolucion(String algoritmo) throws IOException {
+		FileWriter file = new FileWriter("COLOREO" + "_" + algoritmo + "_" + this.cantNodos + "_" + String.format("%.2f", this.ptajeAdyacencia) + ".out");
 		BufferedWriter buffer = new BufferedWriter(file);
 
 		buffer.write(String.valueOf(this.cantNodos));
@@ -218,6 +242,20 @@ public class GrafoNDNP {
 			buffer.newLine();
 		}
 
+		buffer.close();
+	}
+	
+	private void escribirVectorEstadistico(String algoritmo) throws IOException {
+		FileWriter file = new FileWriter("VECTOR" + "_" + algoritmo + "_" + this.cantNodos + "_" + String.format("%.2f", this.ptajeAdyacencia) + ".out");
+		BufferedWriter buffer = new BufferedWriter(file);
+		
+		for(int i = 0 ; i < this.cantNodos ; i++) {
+			buffer.write(String.valueOf(i+1));
+			buffer.write(" ");
+			buffer.write(String.valueOf(this.mejoresColores[i]));
+			buffer.newLine();
+		}
+		
 		buffer.close();
 	}
 
