@@ -33,9 +33,9 @@ public class Main {
 			System.out.println("SALIDA NO VÁLIDA");
 		*/
 		//GrafoGenerator.aleatorioConProbabilidad(10, 0.9);
-		//GrafoGenerator.aleatorioConPorcentajeAdyacencia(10, 0.5);
+		GrafoGenerator.aleatorioConPorcentajeAdyacencia(600, 0.9);
 		//GrafoGenerator.regularConGrado(8, 3);
-		//GrafoGenerator.regularConPorcentajeAdyacencia(8, 0.4);
+		//GrafoGenerator.regularConPorcentajeAdyacencia(1000, 0.50);
 		//GrafoGenerator.nPartito(4, 5);
 		//GrafoGenerator.nPartito(10, 3);
 	}

@@ -49,18 +49,19 @@ public class GrafoGenerator {
 					random.add(new RandomParDeNodos(new ParDeNodos(i, j), rand.nextDouble()));
 				else
 					random.add(new RandomParDeNodos(new ParDeNodos(j, i), rand.nextDouble()));
-				cantAristas++;
+				
 			}
 		}
-
+		
 		Collections.sort(random);
 
-		for (int i = 0; i < cantNodos * porcentaje; i++) {
+		for (int i = 0; i < cantMaximaAristas * porcentaje; i++) {
 			array.add(random.get(i).getNodos());
+			cantAristas++;
 		}
 
 		ParDeNodos grados = calcularGrado(array, cantNodos);
-		String path = "ALEATORIO_PTAJE_" + cantNodos + "_" + porcentaje + ".txt";
+		String path = "ALEATORIO_PTAJE_" + cantNodos + "_" + String.format("%.2f", porcentaje) + ".txt";
 
 		escribirGrafoEnArchivo(path, array, cantNodos, cantAristas, porcentaje, grados.getNodo1(), grados.getNodo2());
 	}
@@ -125,7 +126,7 @@ public class GrafoGenerator {
 
 		ParDeNodos grados = calcularGrado(array, cantNodos);
 		double porcentajeAdyacencia = (double) cantAristas / cantMaximaAristas;
-		String path = "REGULAR_" + cantNodos + "_" + grado + ".txt";
+		String path = "REGULAR_" + cantNodos + "_" + String.format("%.2f", porcentajeAdyacencia) + ".txt";
 
 		escribirGrafoEnArchivo(path, array, cantNodos, cantAristas, porcentajeAdyacencia, grados.getNodo1(),
 				grados.getNodo2());
@@ -135,7 +136,7 @@ public class GrafoGenerator {
 		int cantMaximaAristas = (cantNodos*(cantNodos - 1)) / 2;
 		int grado = (int) Math.ceil(((porcentaje * cantMaximaAristas) / (cantNodos / 2)));
 		double minimo = (double) (cantNodos/2) / cantMaximaAristas;
-		System.out.println("el minimo es: " + String.format("%1.3f", minimo));
+		
 		if(porcentaje < minimo) {
 			System.out.println("El porcentaje de adyacencia ingresado es demasiado bajo para generar un grafo regular (el minimo es: " + String.format("%1.3f", minimo) + ")");
 			System.exit(1);
@@ -223,7 +224,7 @@ public class GrafoGenerator {
 		buffer.write(" ");
 		buffer.write(String.valueOf(cantAristas));
 		buffer.write(" ");
-		buffer.write(String.format("%1.1f", porcentajeAdyacencia));
+		buffer.write(String.format("%1.2f", porcentajeAdyacencia));
 
 		buffer.write(" ");
 		buffer.write(String.valueOf(gradoMaximo));
