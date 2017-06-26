@@ -10,20 +10,24 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		GrafoNDNP grafo = new GrafoNDNP("grafo.in");
 		
-		grafo.mostrarAristas();
+		//grafo.mostrarAristas();
+		//grafo.mostrarNodos();
+		grafo.coloreoSecuencial(1);
 		
-		//ProbadorColoreo probador = new ProbadorColoreo("grafo.in", "coloreado.out");
-		//System.out.println("ENTRADA: ");
-		//probador.mostrarEntrada();
-		//System.out.println("SALIDA: ");
-		//probador.mostrarSalida();
-		//System.out.println();
-		/*
+		//System.out.println(grafo.getGrafo().hayArista(grafo.getGrafo().getIndice(2, 2)));
+		
+		ProbadorColoreo probador = new ProbadorColoreo("grafo.in", "coloreado.out");
+		System.out.println("ENTRADA: ");
+		probador.mostrarEntrada();
+		System.out.println("SALIDA: ");
+		probador.mostrarSalida();
+		System.out.println();
+		
 		if(probador.probar())
 			System.out.println("TODO OK");
 		else
 			System.out.println("SALIDA NO VÁLIDA");
-		 */
+		 
 		//GrafoGenerator.aleatorioConProbabilidad(10, 0.9);
 		//GrafoGenerator.aleatorioConPorcentajeAdyacencia(10, 0.5);
 		//GrafoGenerator.regularConGrado(8, 3);
