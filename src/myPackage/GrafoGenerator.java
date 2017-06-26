@@ -20,7 +20,10 @@ public class GrafoGenerator {
 		for (int i = 0; i < cantNodos - 1; i++) {
 			for (int j = i + 1; j < cantNodos; j++) {
 				if (rand.nextFloat() < probabilidad) {
-					array.add(new ParDeNodos(i, j));
+					if(i < j)
+						array.add(new ParDeNodos(i, j));
+					else
+						array.add(new ParDeNodos(j, i));
 					cantAristas++;
 				}
 			}
@@ -28,7 +31,7 @@ public class GrafoGenerator {
 
 		ParDeNodos grados = calcularGrado(array, cantNodos);
 		double porcentajeAdyacencia = (double) cantAristas / cantMaximaAristas;
-		String path = "grafo_aleatorio_con_probabilidad.txt";
+		String path = "ALEATORIO_PROB_" + cantNodos + "_" + probabilidad + ".txt";
 
 		escribirGrafoEnArchivo(path, array, cantNodos, cantAristas, porcentajeAdyacencia, grados.getNodo1(),
 				grados.getNodo2());
@@ -42,7 +45,10 @@ public class GrafoGenerator {
 		int cantAristas = 0;
 		for (int i = 0; i < cantNodos - 1; i++) {
 			for (int j = i + 1; j < cantNodos; j++) {
-				random.add(new RandomParDeNodos(new ParDeNodos(i, j), rand.nextDouble()));
+				if(i < j)
+					random.add(new RandomParDeNodos(new ParDeNodos(i, j), rand.nextDouble()));
+				else
+					random.add(new RandomParDeNodos(new ParDeNodos(j, i), rand.nextDouble()));
 				cantAristas++;
 			}
 		}
@@ -54,7 +60,7 @@ public class GrafoGenerator {
 		}
 
 		ParDeNodos grados = calcularGrado(array, cantNodos);
-		String path = "grafo_aleatorio_con_porcentaje_adyacencia.txt";
+		String path = "ALEATORIO_PTAJE_" + cantNodos + "_" + porcentaje + ".txt";
 
 		escribirGrafoEnArchivo(path, array, cantNodos, cantAristas, porcentaje, grados.getNodo1(), grados.getNodo2());
 	}
@@ -119,7 +125,7 @@ public class GrafoGenerator {
 
 		ParDeNodos grados = calcularGrado(array, cantNodos);
 		double porcentajeAdyacencia = (double) cantAristas / cantMaximaAristas;
-		String path = "grafo_regular.txt";
+		String path = "REGULAR_" + cantNodos + "_" + grado + ".txt";
 
 		escribirGrafoEnArchivo(path, array, cantNodos, cantAristas, porcentajeAdyacencia, grados.getNodo1(),
 				grados.getNodo2());
@@ -129,7 +135,7 @@ public class GrafoGenerator {
 		int cantMaximaAristas = (cantNodos*(cantNodos - 1)) / 2;
 		int grado = (int) Math.ceil(((porcentaje * cantMaximaAristas) / (cantNodos / 2)));
 		double minimo = (double) (cantNodos/2) / cantMaximaAristas;
-		
+		System.out.println("el minimo es: " + String.format("%1.3f", minimo));
 		if(porcentaje < minimo) {
 			System.out.println("El porcentaje de adyacencia ingresado es demasiado bajo para generar un grafo regular (el minimo es: " + String.format("%1.3f", minimo) + ")");
 			System.exit(1);

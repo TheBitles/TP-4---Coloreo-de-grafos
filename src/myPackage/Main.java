@@ -8,33 +8,34 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		GrafoGenerator.regularConGrado(100, 4);
-		GrafoNDNP grafo = new GrafoNDNP("grafo.in");
+		
+		//GrafoGenerator.regularConGrado(100, 4);
+		//GrafoNDNP grafo = new GrafoNDNP("grafo.in");
 		//grafo.mostrar();
 		//grafo.mostrarAristas();
 		//grafo.mostrarNodos();
-		grafo.coloreoSecuencial(1);
+		//grafo.coloreoSecuencial(1);
 		//grafo.coloreoWelshPowell(10);
 		//grafo.coloreoMatula(10);
 		
 		//System.out.println(grafo.getGrafo().hayArista(grafo.getGrafo().getIndice(1, 0)));
 		
-		ProbadorColoreo probador = new ProbadorColoreo("grafo.in", "coloreado.out");
+		//ProbadorColoreo probador = new ProbadorColoreo("grafo.in", "coloreado.out");
 		//System.out.println("ENTRADA: ");
 		//probador.mostrarEntrada();
 		//System.out.println("SALIDA: ");
 		//probador.mostrarSalida();
 		//System.out.println();
-		
+		/*
 		if(probador.probar())
 			System.out.println("TODO OK");
 		else
 			System.out.println("SALIDA NO VÁLIDA");
-		
+		*/
 		//GrafoGenerator.aleatorioConProbabilidad(10, 0.9);
 		//GrafoGenerator.aleatorioConPorcentajeAdyacencia(10, 0.5);
-		//GrafoGenerator.regularConGrado(8, 3);
-		//GrafoGenerator.regularConPorcentajeAdyacencia(6, 0.1);
+		GrafoGenerator.regularConGrado(8, 3);
+		GrafoGenerator.regularConPorcentajeAdyacencia(8, 0.4);
 		//GrafoGenerator.nPartito(4, 5);
 	}
 
