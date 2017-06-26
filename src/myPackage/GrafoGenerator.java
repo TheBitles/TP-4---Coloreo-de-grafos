@@ -150,41 +150,38 @@ public class GrafoGenerator {
 	
 	public static void nPartito(int cantNodos, int cantConjuntos) throws IOException {
 		ArrayList<ParDeNodos> array = new ArrayList<ParDeNodos>();
+		ArrayList<Integer> conjuntos = new ArrayList<Integer>();
+		Random rand = new Random();
+		int random;
 		int cantMaximaAristas = (cantNodos*(cantNodos - 1)) / 2;
 		int cantAristas = 0;
-		int noAgregar = 0;
-		int salto;
-		boolean noAgregarFlag = true;
 		
 		if(cantConjuntos > cantNodos) {
 			System.out.println("La cantidad de conjuntos no puede ser mayor a la cantidad de nodos");
 			System.exit(1);
 		}
 		
-		salto = cantConjuntos;
-
+		for(int i = 0 ; i < cantNodos ; i++) {
+			random = rand.nextInt(cantConjuntos);
+			conjuntos.add(random);
+			System.out.println(random);
+		}
+		
 		for(int i = 0 ; i < cantNodos - 1 ; i++) {
 			for(int j = i + 1 ; j < cantNodos ; j++) {
-				if(noAgregarFlag) {
-					noAgregar = i + salto;
-					noAgregarFlag = false;
-				}
-				if(j != noAgregar) {
-					array.add(new ParDeNodos(i, j));
+				if(conjuntos.get(i) != conjuntos.get(j)) { // Si el nodo1 y el nodo2 están en conjuntos diferentes
+					if(i < j)
+						array.add(new ParDeNodos(i, j));
+					else
+						array.add(new ParDeNodos(j, i));
 					cantAristas++;
 				}
-				else {
-					salto+=cantConjuntos;
-					noAgregarFlag = true;
-				}
 			}
-			salto = cantConjuntos;
-			noAgregarFlag = true;
 		}
 		
 		ParDeNodos grados = calcularGrado(array, cantNodos);
 		double porcentajeAdyacencia = (double) cantAristas / cantMaximaAristas;
-		String path = "grafo_" + String.valueOf(cantConjuntos) + "_partito.txt";
+		String path = cantConjuntos + "_PARTITO" + ".txt";
 		
 		escribirGrafoEnArchivo(path, array, cantNodos, cantAristas, porcentajeAdyacencia, grados.getNodo1(),
 				grados.getNodo2());

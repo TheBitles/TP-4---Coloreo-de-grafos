@@ -34,9 +34,10 @@ public class Main {
 		*/
 		//GrafoGenerator.aleatorioConProbabilidad(10, 0.9);
 		//GrafoGenerator.aleatorioConPorcentajeAdyacencia(10, 0.5);
-		GrafoGenerator.regularConGrado(8, 3);
-		GrafoGenerator.regularConPorcentajeAdyacencia(8, 0.4);
+		//GrafoGenerator.regularConGrado(8, 3);
+		//GrafoGenerator.regularConPorcentajeAdyacencia(8, 0.4);
 		//GrafoGenerator.nPartito(4, 5);
+		//GrafoGenerator.nPartito(10, 3);
 	}
 
 }
