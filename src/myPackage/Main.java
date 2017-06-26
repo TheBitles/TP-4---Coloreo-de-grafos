@@ -12,12 +12,13 @@ public class Main {
 		
 		//grafo.mostrarAristas();
 		//grafo.mostrarNodos();
-		//grafo.coloreoSecuencial(1);
-		//grafo.coloreoWelshPowell(1);
+		grafo.coloreoSecuencial(10);
+		grafo.coloreoWelshPowell(1);
 		grafo.coloreoMatula(1);
 		
 		//System.out.println(grafo.getGrafo().hayArista(grafo.getGrafo().getIndice(2, 2)));
 		
+		/*
 		ProbadorColoreo probador = new ProbadorColoreo("grafo.in", "coloreado.out");
 		System.out.println("ENTRADA: ");
 		probador.mostrarEntrada();
@@ -29,6 +30,7 @@ public class Main {
 			System.out.println("TODO OK");
 		else
 			System.out.println("SALIDA NO VÁLIDA");
+		 */
 		 
 		//GrafoGenerator.aleatorioConProbabilidad(10, 0.9);
 		//GrafoGenerator.aleatorioConPorcentajeAdyacencia(10, 0.5);

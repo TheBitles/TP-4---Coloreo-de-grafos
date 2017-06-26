@@ -106,14 +106,25 @@ public class GrafoNDNP {
 	}
 
 	public void coloreoSecuencial(int corridas) throws IOException {
+		int mejorColor = 0;
+		int nroCorrida = 0;
 		for (int i = 0; i < corridas; i++) {
 			Collections.shuffle(this.nodos);
 			this.colorear();
+			if(this.colorMax < mejorColor || mejorColor == 0) {
+				mejorColor = this.colorMax;
+				nroCorrida = i;
+			}
 		}
-		this.escribirSolucion();
+		if(corridas == 1)
+			this.escribirSolucion();
+		System.out.print("SECUENCIAL: ");
+		System.out.println("Menor cantidad de colores: " + mejorColor + ", en numero de iteracion: " + nroCorrida);
 	}
 
 	public void coloreoWelshPowell(int corridas) throws IOException {
+		int mejorColor = 0;
+		int nroCorrida = 0;
 		for (int i = 0 ; i < corridas ; i++) {
 			Collections.shuffle(this.nodos);
 			Collections.sort(this.nodos, new Comparator<Nodo>(){
@@ -123,11 +134,20 @@ public class GrafoNDNP {
 				}
 			});
 			this.colorear();
+			if(this.colorMax < mejorColor || mejorColor == 0) {
+				mejorColor = this.colorMax;
+				nroCorrida = i;
+			}
 		}
-		this.escribirSolucion();
+		if(corridas == 1)
+			this.escribirSolucion();
+		System.out.print("WELSH-POWELL: ");
+		System.out.println("Menor cantidad de colores: " + mejorColor + ", en numero de iteracion: " + nroCorrida);
 	}
 
 	public void coloreoMatula(int corridas) throws IOException {
+		int mejorColor = 0;
+		int nroCorrida = 0;
 		for (int i = 0 ; i < corridas ; i++) {
 			Collections.shuffle(this.nodos);
 			Collections.sort(this.nodos, new Comparator<Nodo>(){
@@ -137,8 +157,15 @@ public class GrafoNDNP {
 				}
 			});
 			this.colorear();
+			if(this.colorMax < mejorColor || mejorColor == 0) {
+				mejorColor = this.colorMax;
+				nroCorrida = i;
+			}
 		}
-		this.escribirSolucion();
+		if(corridas == 1)
+			this.escribirSolucion();
+		System.out.print("MATULA: ");
+		System.out.println("Menor cantidad de colores: " + mejorColor + ", en numero de iteracion: " + nroCorrida);
 	}
 
 	public void mostrar() {
