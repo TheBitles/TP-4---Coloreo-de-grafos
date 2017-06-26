@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -105,7 +106,6 @@ public class GrafoNDNP {
 	}
 
 	public void coloreoSecuencial(int corridas) throws IOException {
-		int colores = 0;
 		for (int i = 0; i < corridas; i++) {
 			Collections.shuffle(this.nodos);
 			this.colorear();
@@ -113,12 +113,32 @@ public class GrafoNDNP {
 		this.escribirSolucion();
 	}
 
-	public void coloreoWelshPowell(int corridas) {
-
+	public void coloreoWelshPowell(int corridas) throws IOException {
+		for (int i = 0 ; i < corridas ; i++) {
+			Collections.shuffle(this.nodos);
+			Collections.sort(this.nodos, new Comparator<Nodo>(){
+				@Override
+				public int compare(Nodo nodo1, Nodo nodo2) {
+					return nodo2.getGrado() - nodo1.getGrado(); // ordeno por grado decreciente
+				}
+			});
+			this.colorear();
+		}
+		this.escribirSolucion();
 	}
 
-	public void coloreoMatula(int corridas) {
-
+	public void coloreoMatula(int corridas) throws IOException {
+		for (int i = 0 ; i < corridas ; i++) {
+			Collections.shuffle(this.nodos);
+			Collections.sort(this.nodos, new Comparator<Nodo>(){
+				@Override
+				public int compare(Nodo nodo1, Nodo nodo2) {
+					return nodo1.getGrado() - nodo2.getGrado(); // ordeno por grado creciente
+				}
+			});
+			this.colorear();
+		}
+		this.escribirSolucion();
 	}
 
 	public void mostrar() {

@@ -12,7 +12,9 @@ public class Main {
 		
 		//grafo.mostrarAristas();
 		//grafo.mostrarNodos();
-		grafo.coloreoSecuencial(1);
+		//grafo.coloreoSecuencial(1);
+		//grafo.coloreoWelshPowell(1);
+		grafo.coloreoMatula(1);
 		
 		//System.out.println(grafo.getGrafo().hayArista(grafo.getGrafo().getIndice(2, 2)));
 		
