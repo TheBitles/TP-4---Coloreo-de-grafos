@@ -23,9 +23,9 @@ public class GrafoNDNP {
 
 	private int colorMax = 1;
 	private ArrayList<Nodo> nodos;
-	private int[] nodosColoreados; // el indice coincide con el numero de nodo,
-									// y el valor que guarda es el color
+	private int[] nodosColoreados; // el indice coincide con el numero de nodo, y el valor que guarda es el color
 	private int[] gradosNodos;
+	private int[] solucion;
 
 	public MatrizSimetrica getGrafo() {
 		return this.grafo;
@@ -49,6 +49,7 @@ public class GrafoNDNP {
 		nodos = new ArrayList<Nodo>();
 		nodosColoreados = new int[this.cantNodos];
 		gradosNodos = new int[this.cantNodos];
+		solucion = new int[this.cantNodos];
 
 		for (int i = 0; i < this.cantNodos; i++) {
 			gradosNodos[i] = 0;
@@ -114,10 +115,11 @@ public class GrafoNDNP {
 			if(this.colorMax < mejorColor || mejorColor == 0) {
 				mejorColor = this.colorMax;
 				nroCorrida = i;
+				this.solucion = this.nodosColoreados.clone(); // copio la mejor solucion hasta el momento
 			}
 		}
-		if(corridas == 1)
-			this.escribirSolucion();
+		
+		this.escribirSolucion();
 		System.out.print("SECUENCIAL: ");
 		System.out.println("Menor cantidad de colores: " + mejorColor + ", en numero de iteracion: " + nroCorrida);
 	}
@@ -137,10 +139,11 @@ public class GrafoNDNP {
 			if(this.colorMax < mejorColor || mejorColor == 0) {
 				mejorColor = this.colorMax;
 				nroCorrida = i;
+				this.solucion = this.nodosColoreados.clone(); // copio la mejor solucion hasta el momento
 			}
 		}
-		if(corridas == 1)
-			this.escribirSolucion();
+
+		this.escribirSolucion();
 		System.out.print("WELSH-POWELL: ");
 		System.out.println("Menor cantidad de colores: " + mejorColor + ", en numero de iteracion: " + nroCorrida);
 	}
@@ -160,10 +163,11 @@ public class GrafoNDNP {
 			if(this.colorMax < mejorColor || mejorColor == 0) {
 				mejorColor = this.colorMax;
 				nroCorrida = i;
+				this.solucion = this.nodosColoreados.clone(); // copio la mejor solucion hasta el momento
 			}
 		}
-		if(corridas == 1)
-			this.escribirSolucion();
+		
+		this.escribirSolucion();
 		System.out.print("MATULA: ");
 		System.out.println("Menor cantidad de colores: " + mejorColor + ", en numero de iteracion: " + nroCorrida);
 	}
@@ -182,7 +186,6 @@ public class GrafoNDNP {
 			System.out.println("n: " + i + " g: " + this.gradosNodos[i]);
 	}
 
-	// es solo para ver si anda bien el algoritmo
 	private void escribirSolucion() throws IOException {
 		FileWriter file = new FileWriter("coloreado.out");
 		BufferedWriter buffer = new BufferedWriter(file);
@@ -200,10 +203,10 @@ public class GrafoNDNP {
 		buffer.write(String.valueOf(this.gradoMin));
 		buffer.newLine();
 
-		for (int i = 0; i < this.nodosColoreados.length; i++) {
+		for (int i = 0; i < this.solucion.length; i++) {
 			buffer.write(String.valueOf(i));
 			buffer.write(" ");
-			buffer.write(String.valueOf(this.nodosColoreados[i]));
+			buffer.write(String.valueOf(this.solucion[i]));
 			buffer.newLine();
 		}
 
