@@ -19,45 +19,9 @@ public class GrafoNDNP {
 	private int gradoMax;
 	private int gradoMin;
 	
-	public int getCantNodos() {
-		return cantNodos;
-	}
-
-	public void setCantNodos(int cantNodos) {
-		this.cantNodos = cantNodos;
-	}
-
-	public int getCantAristas() {
-		return cantAristas;
-	}
-
-	public void setCantAristas(int cantAristas) {
-		this.cantAristas = cantAristas;
-	}
-
-	public double getPtajeAdyacencia() {
-		return ptajeAdyacencia;
-	}
-
-	public void setPtajeAdyacencia(double ptajeAdyacencia) {
-		this.ptajeAdyacencia = ptajeAdyacencia;
-	}
-
-	public int getGradoMax() {
-		return gradoMax;
-	}
-
-	public void setGradoMax(int gradoMax) {
-		this.gradoMax = gradoMax;
-	}
-
-	public int getGradoMin() {
-		return gradoMin;
-	}
-
-	public void setGradoMin(int gradoMin) {
-		this.gradoMin = gradoMin;
-	}
+	private ArrayList<Nodo> nodos;
+	private int[] nodosColoreados; // el indice coincide con el numero de nodo, y el valor que guarda es el color
+	private int[] gradosNodos;
 
 	public GrafoNDNP(String path) throws FileNotFoundException {
 		File file = new File(path);
@@ -72,61 +36,49 @@ public class GrafoNDNP {
 		this.gradoMax = scan.nextInt();
 		this.gradoMin = scan.nextInt();
 		this.grafo = new MatrizSimetrica(this.cantNodos);
+		nodos = new ArrayList<Nodo>();
+		nodosColoreados = new int[this.cantNodos];
+		gradosNodos = new int[this.cantNodos];
+		
+		for(int i = 0 ; i < this.cantNodos ; i++) {
+			gradosNodos[i] = 0;
+		}
 
 		for (int i = 0; i < this.cantAristas; i++) {
 			fil = scan.nextInt();
 			col = scan.nextInt();
+			gradosNodos[fil]++;
+			gradosNodos[col]++;
 			indice = this.grafo.getIndice(fil, col);
 			this.grafo.ponerArista(indice);
 		}
 
+		for(int i = 0 ; i < this.cantNodos ; i++) {
+			Nodo nodo = new Nodo(i);
+			nodo.setGrado(this.gradosNodos[i]);
+			this.nodos.add(nodo);
+		}
+			
 		scan.close();
 	}
+	
+	private void colorear() {
+		
+	}
+	
+	public void coloreoSecuencial(int corridas) {
+		
+	}
+	
+	public void coloreoWelshPowell(int corridas) {
 
-	public void coloreoSecuencialAleatorio() throws IOException {
-		ArrayList<Integer> nodosSinColorear = new ArrayList<Integer>();
-		ArrayList<NodoColoreado> nodosColoreados = new ArrayList<NodoColoreado>();
-		Random random = new Random();
-		int rand;
-		int color = 1;
-		int colorAdyacente = -1;
-		int colorAux = -1;
-		int nodoActual = -1;
-		int nodoColoreado = -1;
-		int colorMax = 1;
-		int k = 0;
-		
-		for(int i = 0 ; i < this.cantNodos ; i++)
-			nodosSinColorear.add(i);
-		
-		rand = random.nextInt((this.cantNodos - k) - 0) + 0;
-		nodoActual = nodosSinColorear.get(rand);
-		nodosColoreados.add(new NodoColoreado(nodoActual, color));
-		nodosSinColorear.remove(rand);
-		k++;
-		
-		for(int i = 0 ; i < this.cantNodos - 1 ; i++) {
-			rand = random.nextInt((this.cantNodos - k) - 0) + 0; // indice
-			nodoActual = nodosSinColorear.get(rand);
-			for(int j = 0 ; j < nodosColoreados.size() ; j++) {
-				nodoColoreado = nodosColoreados.get(j).getColor();
-				colorAdyacente = nodosColoreados.get(j).getColor();
-				if(this.grafo.hayArista(this.grafo.getIndice(nodoActual, nodoColoreado)) && colorAdyacente != colorAux) {
-					color++;
-					colorAux = colorAdyacente;
-					colorMax++;
-				}
-			}
-			nodosColoreados.add(new NodoColoreado(nodoActual, color));
-			nodosSinColorear.remove(rand);
-			color = 1;
-			k++;
-		}
-		
-		escribirSolucion(nodosColoreados, colorMax);
 	}
 
-	private void escribirSolucion(ArrayList<NodoColoreado> array, int cantColores) throws IOException {
+	public void coloreoMatula(int corridas) {
+
+	}
+
+	private void escribirSolucion(int[] coloreados, int cantColores) throws IOException {
 		FileWriter file = new FileWriter("coloreado.out");
 		BufferedWriter buffer = new BufferedWriter(file);
 		
@@ -143,28 +95,27 @@ public class GrafoNDNP {
 		buffer.write(String.valueOf(this.gradoMin));
 		buffer.newLine();
 		
-		for(int i = 0 ; i < array.size() ; i++) {
-			buffer.write(String.valueOf(array.get(i).getNodo()));
+		for(int i = 0 ; i < coloreados.length ; i++) {
+			buffer.write(String.valueOf(i));
 			buffer.write(" ");
-			buffer.write(String.valueOf(array.get(i).getColor()));
+			buffer.write(String.valueOf(coloreados[i]));
 			buffer.newLine();
 		}
 		
 		buffer.close();
 	}
 	
-	public void coloreoWelshPowell() {
-
-	}
-
-	public void coloreoMatula() {
-
-	}
+	
 
 	public void mostrar() {
 		this.grafo.mostrar();
 	}
 
+	public void mostrarGrados() {
+		for(int i = 0 ; i < this.cantNodos ; i++)
+			System.out.println("n: " + i + " g: " + this.gradosNodos[i]);
+	}
+	
 	// test
 	public void mostrarAristas() {
 		int n = this.cantNodos - 1;
