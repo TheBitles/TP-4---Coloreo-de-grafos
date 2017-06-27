@@ -19,6 +19,6 @@ REGULAR 1000 50%:
 	- MATULA: Menor cantidad de colores: 334, en numero de iteracion: 331
 
 REGULAR 1000 75%:
-	- 
-	- 
-	- 
+	- SECUENCIAL: Menor cantidad de colores: 500, en numero de iteracion: 62
+	- WELSH-POWELL: Menor cantidad de colores: 500, en numero de iteracion: 5
+	- MATULA: Menor cantidad de colores: 500, en numero de iteracion: 69
