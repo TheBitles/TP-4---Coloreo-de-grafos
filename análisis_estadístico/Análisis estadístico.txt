@@ -1,20 +1,24 @@
 ALEATORIO 600 40%:
-	- 
-	- 
-	- 
+	- SECUENCIAL: Menor cantidad de colores: 63, en numero de iteracion: 1987
+	- WELSH-POWELL: Menor cantidad de colores: 61, en numero de iteracion: 970
+	- MATULA: Menor cantidad de colores: 66, en numero de iteracion: 119
+
 ALEATORIO 600 60%:
-	- 
-	- 
-	- 
+	- SECUENCIAL: Menor cantidad de colores: 98, en numero de iteracion: 3224
+	- WELSH-POWELL: Menor cantidad de colores: 94, en numero de iteracion: 6870
+	- MATULA: Menor cantidad de colores: 101, en numero de iteracion: 7647
+
 ALEATORIO 600 90%:
-	-
-	-
-	-
+	- SECUENCIAL: Menor cantidad de colores: 197, en numero de iteracion: 7342
+	- WELSH-POWELL: Menor cantidad de colores: 192, en numero de iteracion: 2283
+	- MATULA: Menor cantidad de colores: 202, en numero de iteracion: 7674
+
 REGULAR 1000 50%:
-	-
-	-
-	-
+	- SECUENCIAL: Menor cantidad de colores: 334, en numero de iteracion: 729
+	- WELSH-POWELL: Menor cantidad de colores: 334, en numero de iteracion: 472
+	- MATULA: Menor cantidad de colores: 334, en numero de iteracion: 331
+
 REGULAR 1000 75%:
-	-
-	-
-	-
+	- 
+	- 
+	- 

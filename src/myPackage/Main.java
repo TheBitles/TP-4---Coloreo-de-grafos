@@ -15,9 +15,9 @@ public class Main {
 		//grafo.mostrarAristas();
 		//grafo.mostrarNodos();
 		
-		grafo.coloreoSecuencial(100);
-		grafo.coloreoWelshPowell(100);
-		grafo.coloreoMatula(100);
+		grafo.coloreoSecuencial(10000);
+		grafo.coloreoWelshPowell(10000);
+		grafo.coloreoMatula(10000);
 		
 		//System.out.println(grafo.getGrafo().hayArista(grafo.getGrafo().getIndice(1, 0)));
 		
