@@ -13,7 +13,6 @@ public class Main {
 		//GrafoGenerator.regularConGrado(8, 3);
 		//GrafoGenerator.regularConPorcentajeAdyacencia(1000, 0.50);
 		//GrafoGenerator.nPartito(4, 5);
-		//GrafoGenerator.nPartito(10, 3);
 		
 		GrafoNDNP grafo = new GrafoNDNP("grafo.in");
 

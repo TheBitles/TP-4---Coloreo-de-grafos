@@ -224,7 +224,7 @@ public class GrafoNDNP {
 
 		buffer.write(String.valueOf(this.cantNodos));
 		buffer.write(" ");
-		buffer.write(String.valueOf(this.colorMax));
+		buffer.write(String.valueOf(this.mejorColor));
 		buffer.write(" ");
 		buffer.write(String.valueOf(this.cantAristas));
 		buffer.write(" ");

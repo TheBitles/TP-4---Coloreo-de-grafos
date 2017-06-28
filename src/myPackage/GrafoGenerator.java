@@ -165,7 +165,6 @@ public class GrafoGenerator {
 		for(int i = 0 ; i < cantNodos ; i++) {
 			random = rand.nextInt(cantConjuntos);
 			conjuntos.add(random);
-			System.out.println(random);
 		}
 		
 		for(int i = 0 ; i < cantNodos - 1 ; i++) {
